@@ -2,6 +2,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import CTASection from '@/components/CTASection'
 import InlineIcon from '@/components/InlineIcon'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'About | AXINEX',
@@ -26,7 +27,7 @@ export default function AboutPage() {
           <div className="relative mx-auto flex min-h-[620px] max-w-container-max items-center px-margin-mobile md:px-margin-desktop">
             <div className="max-w-2xl text-white">
               <span className="mb-5 block font-label-md text-label-md uppercase tracking-[0.24em] text-white/75">
-                Since 2008
+                Established 2026
               </span>
               <h1 className="font-headline-xl text-headline-xl leading-[0.95] text-white">
                 Driving the Future of{' '}
@@ -39,12 +40,12 @@ export default function AboutPage() {
                 computing, and resilient software ecosystems designed for the speed of modern business.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button className="h-12 rounded-lg bg-vibrant-red px-7 font-label-md text-label-md text-on-primary shadow-lg transition-transform hover:-translate-y-0.5 hover:shadow-xl">
+                <Link href="/services#capabilities" className="inline-flex items-center h-12 rounded-lg bg-vibrant-red px-7 font-label-md text-label-md text-on-primary shadow-lg transition-transform hover:-translate-y-0.5 hover:shadow-xl">
                   Our Solutions
-                </button>
-                <button className="h-12 rounded-lg border border-white/25 bg-white/10 px-7 font-label-md text-label-md text-white backdrop-blur-sm transition-colors hover:bg-white/15">
+                </Link>
+                <Link href="/#faq" className="inline-flex items-center h-12 rounded-lg border border-white/25 bg-white/10 px-7 font-label-md text-label-md text-white backdrop-blur-sm transition-colors hover:bg-white/15">
                   Learn More
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -54,19 +55,20 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-gutter md:grid-cols-2 items-center">
             <div>
               <span className="mb-4 block font-label-md text-label-md uppercase tracking-[0.24em] text-vibrant-red">
-                Since 2008
+                Established 2026
               </span>
               <h2 className="font-headline-lg text-headline-lg text-primary">A Legacy of Precision Engineering</h2>
               <p className="mt-5 max-w-xl font-body-md text-on-surface-variant leading-relaxed">
-                Axinex began as a specialized boutique consultancy focused on solving the most complex
-                network bottleneck issues for financial institutions. Over two decades, we have evolved
-                into a global infrastructure leader, managing the foundational systems for Fortune 500
-                companies.
+                Axinex Technologies is a forward-thinking, service-based software solutions company dedicated to empowering
+                businesses, institutions, and government organizations through innovative digital technologies.
+                We specialize in delivering reliable, scalable, and customized IT solutions that streamline operations, enhance
+                customer engagement, and accelerate digital transformation. With a strong foundation in technical excellence
+                and professional project management, Axinex Technologies stands as your trusted technology partner. 
               </p>
               <p className="mt-5 max-w-xl font-body-md text-on-surface-variant leading-relaxed">
-                Our journey is defined by a relentless pursuit of technical excellence and a commitment
-                to building software that does not just work, but outperforms expectations under the
-                most rigorous conditions.
+                Axinex Technologies is a structured, service-based software solutions provider capable of delivering customized software,
+                mobile applications, web applications, and dynamic websites through a professional and compliant execution
+                framework.  
               </p>
             </div>
 
@@ -132,37 +134,130 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface">
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-[#eef5fb]">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <span className="mb-4 block font-label-md text-label-md uppercase tracking-[0.24em] text-vibrant-red">
                 Executive Leadership
               </span>
               <h2 className="font-headline-lg text-headline-lg text-primary">Visionaries Behind Axinex</h2>
+              <p className="mt-3 max-w-md font-body-md text-on-surface-variant">
+                A diverse panel of industry veterans from top-tier tech firms and academic institutions.
+              </p>
             </div>
-            <p className="max-w-md text-right font-body-md text-on-surface-variant md:pt-6 md:text-left">
-              A diverse panel of industry veterans from top-tier tech firms and academic institutions.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-gutter sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-flow-col auto-cols-[190px] gap-10 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {[
-              { name: 'Julian Thorne', title: 'Chief Executive Officer', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&q=80&auto=format&fit=crop' },
-              { name: 'Elena Rodriguez', title: 'Chief Technology Officer', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&q=80&auto=format&fit=crop' },
-              { name: 'Marcus Sterling', title: 'Head of Global Operations', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80&auto=format&fit=crop' },
-              { name: 'Sarah Chen', title: 'Director of Innovation', img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=900&q=80&auto=format&fit=crop' },
+              { id: 1, name: 'Founder', title: 'Founder', img: '/assets/Founder.jpeg' },
+              { id: 2, name: 'Co-Founder', title: 'Co-Founder', img: '/assets/Co-Founder.jpeg' },
+              { id: 3, name: 'President', title: 'President', img: '/assets/President.jpeg' },
+              { id: 4, name: 'Senior Architect', title: 'Senior Architect', img: '/assets/Pradnya.png' },
+              { id: 5, name: 'Senior Architect', title: 'Senior Architect', img: '/assets/Vaibhav.png' },
             ].map((person) => (
-              <div key={person.name} className="group">
-                <div className="overflow-hidden rounded-md bg-white shadow-sm">
+              <div key={person.id} className="group">
+                <div className="overflow-hidden rounded-md border border-slate-900/20 bg-white shadow-sm ring-1 ring-primary/10">
                   <img
                     src={person.img}
-                    alt={person.name}
-                    className="h-[290px] w-full object-cover grayscale transition duration-500 group-hover:scale-[1.02]"
+                    alt={person.title}
+                    className="h-[210px] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
                   />
                 </div>
-                <div className="mt-3">
-                  <div className="font-headline-md text-headline-md text-primary">{person.name}</div>
+                <div className="mt-3 text-center">
+                  <div className="font-headline-md font-bold text-[1.28rem] leading-tight tracking-[-0.02em] whitespace-nowrap text-primary md:text-[1.38rem]">
+                    {person.name}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface">
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="mb-4 block font-label-md text-label-md uppercase tracking-[0.24em] text-vibrant-red">
+                Our Developers
+              </span>
+              <h2 className="font-headline-lg text-headline-lg text-primary">The Team Building Axinex</h2>
+              <p className="mt-3 max-w-md font-body-md text-on-surface-variant">
+                Frontend and backend engineers shaping the product experience and platform foundation.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-flow-col auto-cols-[190px] gap-10 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {[
+              {
+                id: 1,
+                name: 'Srushti Tingane',
+                title: 'Frontend Developer',
+                img: '/assets/srushti-tingane.jpeg',
+                emailHref: 'mailto:srushtitingane25@gmail.com',
+                linkedinHref: 'https://www.linkedin.com/in/srushti-tingane-97387327b/',
+              },
+              {
+                id: 2,
+                name: 'Aafreen Khan',
+                title: 'Frontend Developer',
+                img: '/assets/aafreen-khan.jpeg',
+                emailHref: 'mailto:aafreenk7106@gmail.com',
+                linkedinHref: 'https://www.linkedin.com/in/aafreen-khan-170562314/',
+              },
+              {
+                id: 3,
+                name: 'Rahul Jangir',
+                title: 'Backend Developer',
+                img: '/assets/rahul-jangir.jpeg',
+                emailHref: 'mailto:rahul.n.jangir@gmail.com',
+                linkedinHref: 'https://www.linkedin.com/in/rahul-jangir-17197b2a3/',
+              },
+              {
+                id: 4,
+                name: 'Dhananjay Shirse',
+                title: 'Backend Developer',
+                img: '/assets/dhananjay-shirse.jpeg',
+                emailHref: 'mailto:dhananjayshirse7777@outlook.com',
+                linkedinHref: 'https://www.linkedin.com/in/dhananjay-shirse-90960a321/',
+              },
+              {
+                id: 5,
+                name: 'Anih Joshi',
+                title: 'Frontend Developer',
+                img: '/assets/anih-joshi.jpeg',
+                emailHref: 'mailto:anihjoshi31@gmail.com',
+                linkedinHref: 'https://www.linkedin.com/in/anih-joshi-2a7ab5309/',
+              },
+            ].map((person) => (
+              <div key={person.name} className="group">
+                <div className="overflow-hidden rounded-md border border-slate-900/20 bg-white shadow-sm ring-1 ring-primary/10">
+                  <img
+                    src={person.img}
+                    alt={person.title}
+                    className="h-[210px] w-full object-cover grayscale transition duration-500 group-hover:scale-[1.02] group-hover:grayscale-0"
+                  />
+                </div>
+                <div className="mt-3 text-center">
+                  <div className="font-headline-md font-bold text-[1.22rem] leading-tight tracking-[-0.02em] whitespace-nowrap text-primary md:text-[1.32rem]">
+                    {person.name}
+                  </div>
                   <div className="mt-1 text-sm text-on-surface-variant">{person.title}</div>
+                  <div className="mt-3 flex items-center justify-center gap-2">
+                    <a
+                      href={person.emailHref}
+                      aria-label={`Email ${person.name}`}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/15 text-primary transition hover:-translate-y-0.5 hover:bg-primary hover:text-white"
+                    >
+                      <InlineIcon name="mail" className="h-5 w-5" />
+                    </a>
+                    <a
+                      href={person.linkedinHref}
+                      aria-label={`${person.name} on LinkedIn`}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/15 text-primary transition hover:-translate-y-0.5 hover:bg-primary hover:text-white"
+                    >
+                      <InlineIcon name="linkedin" className="h-5 w-5" />
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}

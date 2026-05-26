@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function HeroSection() {
   return (
     <section className="relative min-h-[calc(100vh-5rem)] flex items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
@@ -35,12 +37,12 @@ export default function HeroSection() {
             high-performance infrastructure designed for the next era of technological evolution.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-primary text-on-primary h-[48px] px-8 rounded-lg font-label-md text-label-md hover:shadow-xl hover:translate-y-[-2px] transition-all">
+            <Link href="/services#capabilities" className="inline-flex items-center justify-center bg-primary text-on-primary h-[48px] px-8 rounded-lg font-label-md text-label-md hover:shadow-xl hover:translate-y-[-2px] transition-all">
               Explore Solutions
-            </button>
-            <button className="border border-primary text-primary h-[48px] px-8 rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-all">
+            </Link>
+            <Link href="/#faq" className="inline-flex items-center justify-center border border-primary text-primary h-[48px] px-8 rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-all">
               Our Process
-            </button>
+            </Link>
           </div>
         </div>
 

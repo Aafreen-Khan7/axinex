@@ -1,4 +1,4 @@
-type IconName = 'arrow_forward' | 'bolt' | 'group' | 'hub' | 'security' | 'terminal'
+type IconName = 'arrow_forward' | 'bolt' | 'group' | 'hub' | 'linkedin' | 'mail' | 'security' | 'terminal' | 'eye' | 'rocket' | 'stars'
 
 export default function InlineIcon({
   name,
@@ -57,6 +57,49 @@ export default function InlineIcon({
         <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 12h13" className={shared} strokeLinecap="round" />
           <path d="m12 6 6 6-6 6" className={shared} strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )
+    case 'eye':
+      return (
+        <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" className={shared} strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="12" cy="12" r="3" className={shared} />
+        </svg>
+      )
+    case 'rocket':
+      return (
+        <span
+          className={`material-symbols-outlined ${className}`}
+          style={{ fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}
+          aria-hidden="true"
+        >
+          rocket_launch
+        </span>
+      )
+    case 'stars':
+      return (
+        <span
+          className={`material-symbols-outlined ${className}`}
+          style={{ fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}
+          aria-hidden="true"
+        >
+          auto_awesome
+        </span>
+      )
+    case 'mail':
+      return (
+        <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3.5" y="6" width="17" height="12" rx="2" className={shared} />
+          <path d="m4.5 7.5 7.1 5.1c.2.1.4.1.6 0l7.3-5.1" className={shared} strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )
+    case 'linkedin':
+      return (
+        <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3.5" y="3.5" width="17" height="17" rx="3" className={shared} />
+          <path d="M8 10v6" className={shared} strokeLinecap="round" />
+          <path d="M8 7.5h.01" className={shared} strokeLinecap="round" />
+          <path d="M11.5 10v6M11.5 12.2c0-1.3 1-2.4 2.3-2.4 1.4 0 2.2 1 2.2 2.7V16" className={shared} strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       )
     default:

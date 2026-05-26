@@ -32,10 +32,7 @@ export default function AdminLoginPage() {
         {/* Brand Header */}
         <div className="flex flex-col items-center text-center space-y-stack-sm">
           <div className="flex items-baseline relative">
-            <span className="absolute -top-4 left-1/2 -translate-x-1/2 w-3 h-3 bg-vibrant-red rounded-full"></span>
-            <h1 className="font-headline-md text-headline-md text-primary tracking-tighter font-extrabold uppercase">
-              AXINEX
-            </h1>
+            <img src="/assets/axinex-logo-transparent.png" alt="Axinex logo" className="h-10 object-contain" />
           </div>
           <p className="font-label-md text-label-md text-on-surface-variant tracking-widest uppercase">
             Admin Portal

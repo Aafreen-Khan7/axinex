@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 
 const kpiCards = [
@@ -58,77 +57,51 @@ const serviceInquiries = [
   { label: 'Resolved', percent: 18 },
 ]
 
-type Enquiry = {
-  id: string
-  name: string
-  email: string
-  company: string
-  message: string
-  status: 'New' | 'Contacted' | 'Resolved'
-}
-
-const enquiries: Enquiry[] = [
+const recentActivity = [
   {
-    id: 'ENQ-1001',
-    name: 'Aisha Rahman',
-    email: 'aisha.rahman@orbitlogistics.com',
-    company: 'Orbit Logistics',
-    message: 'Need a proposal for cloud migration and security hardening.',
-    status: 'New',
+    title: 'Security Audit Completed',
+    description: 'Project Phoenix infrastructure successfully passed all compliance checks.',
+    time: '2m ago',
+    icon: 'verified',
+    iconClass: 'bg-green-100 text-green-600',
   },
   {
-    id: 'ENQ-1002',
-    name: 'Daniel Cruz',
-    email: 'd.cruz@novagrid.io',
-    company: 'NovaGrid',
-    message: 'Can you share pricing for managed support across 3 regions?',
-    status: 'Contacted',
+    title: 'New Client Onboarding',
+    description: 'Stratis Global has been added to the AXINEX enterprise portfolio.',
+    time: '1h ago',
+    icon: 'group_add',
+    iconClass: 'bg-blue-100 text-blue-600',
   },
   {
-    id: 'ENQ-1003',
-    name: 'Priya Menon',
-    email: 'priya@helixsystems.ai',
-    company: 'Helix Systems',
-    message: 'Looking for a SOC 2 readiness consultation this quarter.',
-    status: 'Resolved',
+    title: 'Server Latency Warning',
+    description: 'Node EU-West-4 experienced unusual traffic spikes; auto-scaled to 8 instances.',
+    time: '4h ago',
+    icon: 'warning',
+    iconClass: 'bg-red-100 text-red-500',
+  },
+  {
+    title: 'System Update Scheduled',
+    description: 'Version 2.5.0 scheduled for deployment on Saturday at 02:00 UTC.',
+    time: 'Yesterday',
+    icon: 'update',
+    iconClass: 'bg-surface-container-high text-outline',
   },
 ]
 
+const teamEfficiency = [
+  { label: 'Engineering', value: 88, barClass: 'bg-white' },
+  { label: 'Customer Support', value: 94, barClass: 'bg-vibrant-red' },
+]
+
 export default function AdminDashboard() {
-  const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null)
-  const [emailSubject, setEmailSubject] = useState('')
-  const [emailMessage, setEmailMessage] = useState('')
-
-  const openEmailModal = (enquiry: Enquiry) => {
-    setSelectedEnquiry(enquiry)
-    setEmailSubject(`Re: Your enquiry (${enquiry.id})`) 
-    setEmailMessage(
-      `Hello ${enquiry.name},\n\nThank you for contacting AXINEX regarding ${enquiry.company}. We received your enquiry and our team is reviewing it.\n\nWe will share the next steps shortly.\n\nBest regards,\nAXINEX Support Team`
-    )
-  }
-
-  const closeEmailModal = () => {
-    setSelectedEnquiry(null)
-    setEmailSubject('')
-    setEmailMessage('')
-  }
-
-  const handleEmailSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    closeEmailModal()
-  }
-
   return (
-    <div className="flex min-h-screen overflow-x-hidden bg-surface">
+    <div className="flex min-h-screen bg-surface">
       <aside className="fixed left-0 top-0 bottom-0 z-40 flex h-screen w-64 flex-col bg-primary text-on-primary shadow-xl">
         <div className="px-6 py-8">
           <div className="mb-8 flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-vibrant-red">
-              <span className="h-2 w-2 rounded-full bg-white"></span>
-            </span>
             <div>
               <h1 className="font-headline-md text-headline-md leading-none text-on-primary">
-                AXINEX
+                <img src="/assets/axinex-logo-transparent.png" alt="Axinex logo" className="h-8 object-contain" />
               </h1>
               <p className="mt-1 text-[10px] uppercase tracking-widest text-on-primary/60">
                 Admin Portal
@@ -175,7 +148,7 @@ export default function AdminDashboard() {
         </div>
       </aside>
 
-      <main className="ml-64 min-h-screen overflow-x-hidden overflow-y-scroll bg-[#f5f7fa] px-6 py-8 lg:px-12 lg:py-10" style={{ scrollbarGutter: 'stable' }}>
+      <main className="ml-64 min-h-screen w-full overflow-y-auto bg-[#f5f7fa] px-6 py-8 lg:px-12 lg:py-10">
         <header className="mb-8 flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
           <div>
             <h2 className="font-headline-lg text-headline-lg tracking-tight text-primary">
@@ -251,143 +224,63 @@ export default function AdminDashboard() {
                 </div>
               ))}
             </div>
+          </div> 
             <div className="mt-8 flex items-center justify-center gap-1">
               <span className="h-8 w-8 rounded-full border-2 border-white bg-surface-container-high"></span>
               <span className="h-8 w-8 rounded-full border-2 border-white bg-surface-container-high -ml-3"></span>
               <span className="h-8 w-8 rounded-full border-2 border-white bg-surface-container-high -ml-3"></span>
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-[11px] text-on-primary -ml-3">+12</span>
             </div>
-          </div>
         </section>
-        <section className="grid grid-cols-1">
-          <div className="rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-stack-lg shadow-sm">
+        <section className="grid grid-cols-1 gap-5 xl:grid-cols-12">
+          <div className="xl:col-span-7 rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-stack-lg shadow-sm">
             <div className="mb-6 flex items-center justify-between">
-              <h4 className="font-headline-md text-[24px] text-primary">Enquiries</h4>
-              <span className="rounded-md bg-surface-container-high px-3 py-1 font-label-md text-caption text-on-surface-variant">
-                {enquiries.length} total
-              </span>
+              <h4 className="font-headline-md text-[24px] text-primary">Recent Activity</h4>
+              <button className="font-label-md text-label-md text-vibrant-red hover:underline">View All</button>
             </div>
+            <div className="space-y-5">
+              {recentActivity.map((item) => (
+                <article key={item.title} className="flex items-start gap-4">
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${item.iconClass}`}>
+                    <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-4">
+                      <h5 className="font-label-md text-label-md text-primary">{item.title}</h5>
+                      <span className="text-caption text-on-surface-variant">{item.time}</span>
+                    </div>
+                    <p className="mt-1 text-body-md text-on-surface-variant">{item.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
 
-            <div className="overflow-hidden rounded-xl border border-outline-variant/20">
-              <div className="overflow-x-auto">
-                <table className="min-w-[980px] w-full text-left">
-                  <thead className="bg-surface-container-high/60">
-                    <tr>
-                      <th className="px-4 py-3 font-label-md text-caption uppercase tracking-wide text-on-surface-variant">ID</th>
-                      <th className="px-4 py-3 font-label-md text-caption uppercase tracking-wide text-on-surface-variant">Name</th>
-                      <th className="px-4 py-3 font-label-md text-caption uppercase tracking-wide text-on-surface-variant">Email</th>
-                      <th className="px-4 py-3 font-label-md text-caption uppercase tracking-wide text-on-surface-variant">Company</th>
-                      <th className="px-4 py-3 font-label-md text-caption uppercase tracking-wide text-on-surface-variant">Message</th>
-                      <th className="px-4 py-3 font-label-md text-caption uppercase tracking-wide text-on-surface-variant">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-surface-container-lowest">
-                    {enquiries.map((enquiry) => (
-                      <tr key={enquiry.id} className="align-top transition-colors hover:bg-surface-container-high/30">
-                        <td className="whitespace-nowrap border-t border-outline-variant/10 px-4 py-4 font-label-md text-label-md text-primary">{enquiry.id}</td>
-                        <td className="whitespace-nowrap border-t border-outline-variant/10 px-4 py-4 font-body-md text-on-surface">{enquiry.name}</td>
-                        <td className="whitespace-nowrap border-t border-outline-variant/10 px-4 py-4 font-body-md text-on-surface-variant">
-                          <a className="hover:text-primary hover:underline" href={`mailto:${enquiry.email}`}>
-                            {enquiry.email}
-                          </a>
-                        </td>
-                        <td className="whitespace-nowrap border-t border-outline-variant/10 px-4 py-4 font-body-md text-on-surface">{enquiry.company}</td>
-                        <td className="border-t border-outline-variant/10 px-4 py-4 font-body-md text-on-surface-variant">
-                          <p className="max-w-[360px] leading-6">{enquiry.message}</p>
-                        </td>
-                        <td className="border-t border-outline-variant/10 px-4 py-4">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span
-                              className={`inline-flex w-fit rounded-full px-3 py-1 font-label-md text-caption ${
-                                enquiry.status === 'Resolved'
-                                  ? 'bg-green-100 text-green-700'
-                                  : enquiry.status === 'Contacted'
-                                  ? 'bg-blue-100 text-blue-700'
-                                  : 'bg-amber-100 text-amber-700'
-                              }`}
-                            >
-                              {enquiry.status}
-                            </span>
-                            <button
-                              className="inline-flex w-fit items-center rounded-md bg-primary px-3 py-1.5 font-label-md text-caption text-on-primary transition-opacity hover:opacity-90"
-                              onClick={() => openEmailModal(enquiry)}
-                              type="button"
-                            >
-                              Send Email
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          <div className="xl:col-span-5 rounded-xl bg-primary p-stack-lg text-on-primary shadow-lg">
+            <h4 className="font-headline-md text-[24px] text-on-primary">Team Efficiency</h4>
+            <p className="mt-2 font-body-md text-on-primary/80">Performance tracking across departments.</p>
+            <div className="mt-8 space-y-6">
+              {teamEfficiency.map((item) => (
+                <div key={item.label}>
+                  <div className="mb-3 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 font-label-md text-label-md">
+                        {item.value}%
+                      </span>
+                      <span className="font-label-md text-label-md text-on-primary">{item.label}</span>
+                    </div>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                    <div className={`h-full rounded-full ${item.barClass}`} style={{ width: `${item.value}%` }}></div>
+                  </div>
+                </div>
+              ))}
             </div>
+            <button className="mt-8 w-full rounded-xl bg-on-primary px-6 py-4 font-label-md text-label-md text-primary transition-transform hover:-translate-y-0.5">
+              Launch Productivity Audit
+            </button>
           </div>
         </section>
-
-        {selectedEnquiry && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-4">
-            <div className="w-full max-w-2xl rounded-xl bg-surface p-6 shadow-xl">
-              <div className="mb-4 flex items-start justify-between gap-4">
-                <div>
-                  <h5 className="font-headline-md text-[22px] text-primary">Send Email to Customer</h5>
-                  <p className="mt-1 font-body-md text-on-surface-variant">To: {selectedEnquiry.email}</p>
-                </div>
-                <button
-                  aria-label="Close email popup"
-                  className="rounded-md bg-surface-container-high px-3 py-1 font-label-md text-caption text-on-surface-variant"
-                  onClick={closeEmailModal}
-                  type="button"
-                >
-                  Close
-                </button>
-              </div>
-
-              <form className="space-y-4" onSubmit={handleEmailSubmit}>
-                <div>
-                  <label className="mb-1 block font-label-md text-caption text-on-surface-variant" htmlFor="email-subject">
-                    Subject:
-                  </label>
-                  <input
-                    className="w-full rounded-lg border border-outline-variant/40 bg-surface-container-lowest px-3 py-2 font-body-md text-on-surface outline-none ring-primary/30 focus:ring"
-                    id="email-subject"
-                    onChange={(event) => setEmailSubject(event.target.value)}
-                    required
-                    type="text"
-                    value={emailSubject}
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-1 block font-label-md text-caption text-on-surface-variant" htmlFor="email-message">
-                    Message:
-                  </label>
-                  <textarea
-                    className="min-h-44 w-full rounded-lg border border-outline-variant/40 bg-surface-container-lowest px-3 py-2 font-body-md text-on-surface outline-none ring-primary/30 focus:ring"
-                    id="email-message"
-                    onChange={(event) => setEmailMessage(event.target.value)}
-                    required
-                    value={emailMessage}
-                  />
-                </div>
-
-                <div className="flex justify-end gap-3">
-                  <button
-                    className="rounded-lg border border-outline-variant/40 px-4 py-2 font-label-md text-label-md text-on-surface"
-                    onClick={closeEmailModal}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                  <button className="rounded-lg bg-primary px-4 py-2 font-label-md text-label-md text-on-primary" type="submit">
-                    Send
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
       </main>
     </div>
   )

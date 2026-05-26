@@ -83,10 +83,7 @@ export default function EmployeeManagement() {
       <aside className="fixed left-0 top-0 bottom-0 z-40 flex h-screen w-64 flex-col bg-primary text-on-primary shadow-xl">
         <div className="px-6 py-8">
           <div className="mb-1 flex items-center gap-2">
-            <span className="font-headline-md text-headline-md font-bold tracking-tighter text-on-primary">
-              AXINEX
-            </span>
-            <span className="mb-4 h-2 w-2 rounded-full bg-vibrant-red"></span>
+            <img src="/assets/axinex-logo-transparent.png" alt="Axinex logo" className="h-8 object-contain" />
           </div>
           <p className="font-label-md text-caption opacity-70">Admin Portal</p>
         </div>

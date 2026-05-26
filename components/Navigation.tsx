@@ -9,10 +9,7 @@ export default function Navigation() {
     <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
       <nav className="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-headline-md text-headline-md font-bold tracking-tighter text-primary">
-            AXINEX
-          </span>
-          <div className="w-2 h-2 rounded-full bg-vibrant-red mt-1"></div>
+          <img src="/assets/axinex-logo-transparent.png" alt="Axinex logo" className="h-8 object-contain" />
         </Link>
 
         <div className="hidden md:flex items-center gap-stack-lg">
@@ -61,9 +58,9 @@ export default function Navigation() {
           >
             Admin Login
           </Link>
-          <button className="bg-vibrant-red text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 shadow-md">
+          <Link href="/contact" className="inline-flex items-center bg-vibrant-red text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 shadow-md">
             Send Enquiry
-          </button>
+          </Link>
         </div>
       </nav>
     </header>

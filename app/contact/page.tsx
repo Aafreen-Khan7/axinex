@@ -1,20 +1,8 @@
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
-const locations = [
-  {
-    city: 'London',
-    note: 'Canary Wharf District',
-    detail: 'Innovation Lab Hub',
-  },
-  {
-    city: 'Singapore',
-    note: 'Marina Bay Sands',
-    detail: 'APAC Operations',
-  },
-]
 
-const trustedBy = ['apartment', 'dns', 'cloud']
+
 
 export const metadata = {
   title: 'Contact Us | AXINEX',
@@ -103,21 +91,21 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <span className="material-symbols-outlined mt-1 flex-shrink-0 text-primary">location_on</span>
                     <div>
-                      <p className="font-label-md text-label-md text-on-surface">Axinex Innovation Tower</p>
-                      <p className="font-body-md text-body-md text-on-surface-variant">1248 Skyline Blvd, Suite 200</p>
-                      <p className="font-body-md text-body-md text-on-surface-variant">San Francisco, CA 94105</p>
+                      <p className="font-label-md text-label-md text-on-surface">Axinex Technologies</p>
+                      <p className="font-body-md text-body-md text-on-surface-variant"> Sr No. 92, 1A/2/1, Lane No.2, Sanket Park, Hadapsar</p>
+                      <p className="font-body-md text-body-md text-on-surface-variant">Pune - 411060</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <span className="material-symbols-outlined mt-1 flex-shrink-0 text-primary">mail</span>
-                    <a href="mailto:hello@axinex.tech" className="font-body-md text-body-md transition-colors hover:text-primary">
-                      hello@axinex.tech
+                    <a href="mailto:axinex.technologies@gmail.com" className="font-body-md text-body-md transition-colors hover:text-primary">
+                      axinex.technologies@gmail.com
                     </a>
                   </div>
                   <div className="flex items-start gap-4">
                     <span className="material-symbols-outlined mt-1 flex-shrink-0 text-primary">phone</span>
-                    <a href="tel:+15550123456" className="font-body-md text-body-md transition-colors hover:text-primary">
-                      +1 (555) 012-3456
+                    <a href="tel:+91 9172551655 " className="font-body-md text-body-md transition-colors hover:text-primary">
+                      +91 9172551655 
                     </a>
                   </div>
                 </div>
@@ -129,28 +117,9 @@ export default function ContactPage() {
                       <span className="material-symbols-outlined text-on-primary">location_on</span>
                     </div>
                     <div className="absolute bottom-3 right-3 rounded-md bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary shadow-sm">
-                      SF Headquarters
+                      Sr No. 92, 1A/2/1, Lane No.2, Sanket Park, Hadapsar, Pune - 411060
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                {locations.map((location) => (
-                  <div key={location.city} className="rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-4 shadow-sm">
-                    <p className="font-label-md text-label-md tracking-[0.18em] text-primary">{location.city.toUpperCase()}</p>
-                    <p className="mt-1 font-caption text-caption text-on-surface-variant">{location.note}</p>
-                    <p className="font-body-md text-body-md text-on-surface-variant">{location.detail}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="space-y-3">
-                <p className="font-label-md text-label-md tracking-[0.24em] text-outline">TRUSTED BY</p>
-                <div className="flex items-center gap-4 text-outline">
-                  {trustedBy.map((icon) => (
-                    <span key={icon} className="material-symbols-outlined text-[20px]">{icon}</span>
-                  ))}
                 </div>
               </div>
             </aside>

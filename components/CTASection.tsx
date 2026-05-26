@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function CTASection() {
   return (
     <section className="py-section-gap px-margin-mobile md:px-margin-desktop max-w-[1000px] mx-auto text-center">
@@ -9,15 +11,15 @@ export default function CTASection() {
           Start a conversation with our architectural consultants today and build the infrastructure of
           tomorrow.
         </p>
-        <div className="flex flex-col md:flex-row justify-center gap-4">
+          <div className="flex flex-col md:flex-row justify-center gap-4">
           <input
             className="min-w-[300px] h-[52px] px-6 rounded-lg border border-outline focus:ring-2 focus:ring-primary focus:border-primary"
             placeholder="Enter your business email"
             type="email"
           />
-          <button className="bg-vibrant-red text-on-primary h-[52px] px-10 rounded-lg font-label-md text-label-md shadow-lg hover:shadow-xl hover:bg-secondary transition-all">
+          <Link href="/contact" className="bg-vibrant-red text-on-primary inline-flex items-center h-[52px] px-6 md:px-10 rounded-lg font-label-md text-label-md shadow-lg hover:shadow-xl hover:bg-secondary transition-all">
             Send Enquiry
-          </button>
+          </Link>
         </div>
       </div>
     </section>
