@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 import Link from 'next/link'
 
 const stats = [
@@ -77,7 +79,97 @@ const teamActivity = [
   },
 ]
 
+type Employee = {
+  name: string
+  email: string
+  role: string
+  experience: string
+  department: string
+  departmentTone: string
+  status: string
+  statusTone: string
+  performance: number
+}
+
+type EmployeeFormState = {
+  name: string
+  email: string
+  role: string
+  experience: string
+  department: string
+  status: string
+  performance: string
+}
+
+const initialEmployees: Employee[] = employees
+
+const initialFormState: EmployeeFormState = {
+  name: '',
+  email: '',
+  role: '',
+  experience: '',
+  department: 'Engineering',
+  status: 'Active',
+  performance: '4',
+}
+
+function getDepartmentTone(department: string) {
+  const tones: Record<string, string> = {
+    Engineering: 'bg-primary-fixed text-on-primary-fixed',
+    Creative: 'bg-secondary-fixed text-on-secondary-fixed',
+    Finance: 'bg-surface-container-high text-primary',
+    Infrastructure: 'bg-primary-fixed text-on-primary-fixed',
+    Operations: 'bg-surface-container-high text-primary',
+    Sales: 'bg-secondary-fixed text-on-secondary-fixed',
+  }
+
+  return tones[department] ?? 'bg-surface-container-high text-primary'
+}
+
+function getStatusTone(status: string) {
+  const tones: Record<string, string> = {
+    Active: 'text-green-600',
+    'In Meeting': 'text-vibrant-red',
+    Offline: 'text-outline',
+    Onboarding: 'text-blue-600',
+  }
+
+  return tones[status] ?? 'text-outline'
+}
+
 export default function EmployeeManagement() {
+  const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false)
+  const [employeesList, setEmployeesList] = useState(initialEmployees)
+  const [formState, setFormState] = useState(initialFormState)
+
+  const closeForm = () => {
+    setIsAddEmployeeOpen(false)
+    setFormState(initialFormState)
+  }
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const performanceValue = Number.parseInt(formState.performance, 10)
+
+    setEmployeesList((currentEmployees) => [
+      {
+        name: formState.name.trim(),
+        email: formState.email.trim(),
+        role: formState.role.trim(),
+        experience: formState.experience.trim(),
+        department: formState.department,
+        departmentTone: getDepartmentTone(formState.department),
+        status: formState.status,
+        statusTone: getStatusTone(formState.status),
+        performance: Number.isNaN(performanceValue) ? 4 : Math.min(5, Math.max(1, performanceValue)),
+      },
+      ...currentEmployees,
+    ])
+
+    closeForm()
+  }
+
   return (
     <div className="flex min-h-screen bg-surface">
       <aside className="fixed left-0 top-0 bottom-0 z-40 flex h-screen w-64 flex-col bg-primary text-on-primary shadow-xl">
@@ -133,7 +225,11 @@ export default function EmployeeManagement() {
               <span className="material-symbols-outlined">filter_list</span>
               Filters
             </button>
-            <button className="rounded-xl bg-primary px-6 py-3 font-label-md text-on-primary transition-opacity hover:opacity-90">
+            <button
+              className="rounded-xl bg-primary px-6 py-3 font-label-md text-on-primary transition-opacity hover:opacity-90"
+              onClick={() => setIsAddEmployeeOpen(true)}
+              type="button"
+            >
               Add Employee
             </button>
           </div>
@@ -166,7 +262,7 @@ export default function EmployeeManagement() {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((employee) => (
+                {employeesList.map((employee) => (
                   <tr key={employee.name} className="border-b border-outline-variant/20 transition-colors hover:bg-surface-container-low">
                     <td className="px-6 py-5">
                       <div className="flex items-center gap-3">
@@ -262,6 +358,123 @@ export default function EmployeeManagement() {
             </button>
           </div>
         </section>
+
+        {isAddEmployeeOpen ? (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-primary/50 px-4 py-8">
+            <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-surface-container-lowest shadow-2xl">
+              <div className="flex items-start justify-between border-b border-outline-variant/20 px-6 py-5">
+                <div>
+                  <h2 className="font-headline-md text-[28px] text-primary">Add Employee</h2>
+                  <p className="mt-1 font-body-md text-on-surface-variant">
+                    Create a new employee record for the admin directory.
+                  </p>
+                </div>
+                <button className="rounded-full p-2 text-on-surface-variant transition-colors hover:bg-surface-container-high" onClick={closeForm} type="button">
+                  <span className="material-symbols-outlined">close</span>
+                </button>
+              </div>
+
+              <form className="grid gap-6 px-6 py-6 md:grid-cols-2" onSubmit={handleSubmit}>
+                <label className="grid gap-2">
+                  <span className="font-label-md text-label-md text-on-surface">Full Name</span>
+                  <input
+                    className="rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+                    onChange={(event) => setFormState((current) => ({ ...current, name: event.target.value }))}
+                    placeholder="Enter employee name"
+                    required
+                    value={formState.name}
+                  />
+                </label>
+
+                <label className="grid gap-2">
+                  <span className="font-label-md text-label-md text-on-surface">Work Email</span>
+                  <input
+                    className="rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+                    onChange={(event) => setFormState((current) => ({ ...current, email: event.target.value }))}
+                    placeholder="name@company.com"
+                    required
+                    type="email"
+                    value={formState.email}
+                  />
+                </label>
+
+                <label className="grid gap-2">
+                  <span className="font-label-md text-label-md text-on-surface">Role</span>
+                  <input
+                    className="rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+                    onChange={(event) => setFormState((current) => ({ ...current, role: event.target.value }))}
+                    placeholder="Job title"
+                    required
+                    value={formState.role}
+                  />
+                </label>
+
+                <label className="grid gap-2">
+                  <span className="font-label-md text-label-md text-on-surface">Experience</span>
+                  <input
+                    className="rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+                    onChange={(event) => setFormState((current) => ({ ...current, experience: event.target.value }))}
+                    placeholder="e.g. 5 years • Senior Level"
+                    required
+                    value={formState.experience}
+                  />
+                </label>
+
+                <label className="grid gap-2">
+                  <span className="font-label-md text-label-md text-on-surface">Department</span>
+                  <select
+                    className="rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+                    onChange={(event) => setFormState((current) => ({ ...current, department: event.target.value }))}
+                    value={formState.department}
+                  >
+                    <option>Engineering</option>
+                    <option>Creative</option>
+                    <option>Finance</option>
+                    <option>Infrastructure</option>
+                    <option>Operations</option>
+                    <option>Sales</option>
+                  </select>
+                </label>
+
+                <label className="grid gap-2">
+                  <span className="font-label-md text-label-md text-on-surface">Status</span>
+                  <select
+                    className="rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+                    onChange={(event) => setFormState((current) => ({ ...current, status: event.target.value }))}
+                    value={formState.status}
+                  >
+                    <option>Active</option>
+                    <option>In Meeting</option>
+                    <option>Offline</option>
+                    <option>Onboarding</option>
+                  </select>
+                </label>
+
+                <label className="grid gap-2 md:col-span-2">
+                  <span className="font-label-md text-label-md text-on-surface">Performance Rating</span>
+                  <input
+                    className="rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+                    min="1"
+                    max="5"
+                    onChange={(event) => setFormState((current) => ({ ...current, performance: event.target.value }))}
+                    placeholder="1 to 5"
+                    type="number"
+                    value={formState.performance}
+                  />
+                </label>
+
+                <div className="flex flex-col-reverse gap-3 md:col-span-2 md:flex-row md:justify-end">
+                  <button className="rounded-xl border border-outline-variant px-6 py-3 font-label-md text-primary transition-colors hover:bg-surface-container-high" onClick={closeForm} type="button">
+                    Cancel
+                  </button>
+                  <button className="rounded-xl bg-primary px-6 py-3 font-label-md text-on-primary transition-opacity hover:opacity-90" type="submit">
+                    Save Employee
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        ) : null}
       </main>
     </div>
   )
